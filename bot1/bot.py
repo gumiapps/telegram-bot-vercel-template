@@ -10,3 +10,5 @@ from telebot.types import (
     ReplyKeyboardMarkup,
     ChatJoinRequest,
 )
+
+bot = TeleBot(settings.BOT_TOKEN, parse_mode="HTML", threaded=False)
