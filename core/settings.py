@@ -10,6 +10,7 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 
 SECRET_KEY = env("SECRET_KEY")
 BOT_TOKEN = env("BOT_TOKEN")
+WEB_HOOK_URL = env("WEB_HOOK_URL")
 
 DEBUG = True
 
@@ -23,7 +24,7 @@ INSTALLED_APPS = [
     "django.contrib.sessions",
     "django.contrib.messages",
     "django.contrib.staticfiles",
-    "bot1",
+    "bot",
 ]
 
 MIDDLEWARE = [
@@ -37,6 +38,8 @@ MIDDLEWARE = [
 ]
 
 ROOT_URLCONF = "core.urls"
+
+AUTH_USER_MODEL = "bot.User"
 
 TEMPLATES = [
     {
@@ -58,6 +61,10 @@ WSGI_APPLICATION = "core.wsgi.application"
 
 DATABASES = {
     "default": {
+        "ENGINE": "django.db.backends.sqlite3",
+        "NAME": BASE_DIR / "db.sqlite3",
+    },
+    "pro": {  # Change this on to default on production
         "ENGINE": "django.db.backends.postgresql_psycopg2",
         "NAME": env("PGDATABASE"),
         "USER": env("PGUSER"),
@@ -66,7 +73,7 @@ DATABASES = {
         "PORT": "5432",
         "OPTIONS": {"sslmode": "require"},
         "DISABLE_SERVER_SIDE_CURSORS": True,
-    }
+    },
 }
 AUTH_PASSWORD_VALIDATORS = [
     {
